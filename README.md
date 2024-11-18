@@ -2,7 +2,9 @@
  AutoUpdater for Github Repo Releases.
  Checks and downloads the latest version of your Github repository.
 
-Get the [Latest Version here](https://github.com/BlueMystical/BlueUpdater/releases/latest/download/BlueUpdater.zip)!
+Get the [Latest Version here](https://github.com/BlueMystical/BlueUpdater/releases/latest/download/BlueUpdater.zip)
+
+![image](https://github.com/user-attachments/assets/397b5763-51d1-423d-bef4-99f799d2efc9)
 
 ## How To
 Open the 'Version.json' file and set the following fields:
@@ -13,7 +15,6 @@ Open the 'Version.json' file and set the following fields:
 - "CurrentVersion": Local Version of the Program being updated.
 
 ![image](https://github.com/user-attachments/assets/62ed08c9-5e1a-4461-95b1-d7845b8ff481)
-
 Save the JSON and put it alongside of 'BlueUpdater.exe' inside the ZIP file of your release.
 Find a way to call BlueUpdater.exe when your program launches to check for updates.
 
@@ -21,7 +22,5 @@ Find a way to call BlueUpdater.exe when your program launches to check for updat
 
 - Microsoft .NET Framework version 4.8 or newer. If you are on Windows 10, you may already have it.
   If you don't have it installed yet, you can get it [here](https://dotnet.microsoft.com/download/dotnet-framework/net48).
-
-![image](https://github.com/user-attachments/assets/397b5763-51d1-423d-bef4-99f799d2efc9)
 
   [Buy me a Coffe](https://buymeacoffee.com/blue.mystic)
