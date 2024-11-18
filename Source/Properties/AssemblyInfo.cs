@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // conjunto de atributos. Cambie estos valores de atributo para modificar la información
 // asociada a un ensamblado.
 [assembly: AssemblyTitle("BlueUpdater")]
-[assembly: AssemblyDescription("Checks and Download the Latest Release of your Github Repo.")]
+[assembly: AssemblyDescription("Checks and downloads the latest version of your Github repo.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Keeping your Sofware Updated.")]
 [assembly: AssemblyProduct("BlueUpdater")]
