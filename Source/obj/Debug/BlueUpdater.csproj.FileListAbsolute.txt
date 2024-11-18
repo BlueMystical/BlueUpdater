@@ -1,0 +1,12 @@
+G:\@Proyectos\VS2019\BlueUpdater\obj\Debug\BlueUpdater.csproj.AssemblyReference.cache
+G:\@Proyectos\VS2019\BlueUpdater\obj\Debug\BlueUpdater.csproj.CoreCompileInputs.cache
+G:\@Proyectos\VS2019\BlueUpdater\bin\Debug\BlueUpdater.exe.config
+G:\@Proyectos\VS2019\BlueUpdater\bin\Debug\BlueUpdater.exe
+G:\@Proyectos\VS2019\BlueUpdater\bin\Debug\BlueUpdater.pdb
+G:\@Proyectos\VS2019\BlueUpdater\bin\Debug\Newtonsoft.Json.dll
+G:\@Proyectos\VS2019\BlueUpdater\bin\Debug\Newtonsoft.Json.pdb
+G:\@Proyectos\VS2019\BlueUpdater\bin\Debug\Newtonsoft.Json.xml
+G:\@Proyectos\VS2019\BlueUpdater\obj\Debug\BlueUpdater.csproj.CopyComplete
+G:\@Proyectos\VS2019\BlueUpdater\obj\Debug\BlueUpdater.exe
+G:\@Proyectos\VS2019\BlueUpdater\obj\Debug\BlueUpdater.pdb
+G:\@Proyectos\VS2019\BlueUpdater\bin\Debug\Version.json
