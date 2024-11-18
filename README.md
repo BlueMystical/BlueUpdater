@@ -12,6 +12,8 @@ Open the 'Version.json' file and set the following fields:
 - "MainExecutable": Filename and extension of the Progran being updated.
 - "CurrentVersion": Local Version of the Program being updated.
 
+![image](https://github.com/user-attachments/assets/62ed08c9-5e1a-4461-95b1-d7845b8ff481)
+
 Save the JSON and put it alongside of 'BlueUpdater.exe' inside the ZIP file of your release.
 Find a way to call BlueUpdater.exe when your program launches to check for updates.
 
