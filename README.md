@@ -4,7 +4,7 @@
 
 Get the [Latest Version here](https://github.com/BlueMystical/BlueUpdater/releases/latest/download/BlueUpdater.zip)
 
-![image](https://github.com/user-attachments/assets/397b5763-51d1-423d-bef4-99f799d2efc9)
+![image](https://github.com/user-attachments/assets/20b595de-3f72-43e7-91eb-9d49493180da)
 
 ## How To
 Open the 'Version.json' file and set the following fields:
@@ -13,10 +13,9 @@ Open the 'Version.json' file and set the following fields:
 - "ReleaseFile": Filename and extension of the Release Asset that will be Downloaded. (Must be a ZIP)
 - "MainExecutable": Filename and extension of the Progran being updated.
 - "CurrentVersion": Local Version of the Program being updated.
-
 ![image](https://github.com/user-attachments/assets/62ed08c9-5e1a-4461-95b1-d7845b8ff481)
-Save the JSON and put it alongside of 'BlueUpdater.exe' inside the ZIP file of your release.
-Find a way to call BlueUpdater.exe when your program launches to check for updates.
+- Save the JSON and put it alongside of 'BlueUpdater.exe' inside the ZIP file of your release.
+- Find a way to call BlueUpdater.exe when your program launches to check for updates.
 
 ## Requirements
 
