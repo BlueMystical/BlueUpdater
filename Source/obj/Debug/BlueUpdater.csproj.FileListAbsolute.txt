@@ -17,6 +17,6 @@ G:\@Proyectos\VS2019\BlueUpdater\Source\bin\Debug\BlueUpdater.pdb
 G:\@Proyectos\VS2019\BlueUpdater\Source\bin\Debug\Newtonsoft.Json.dll
 G:\@Proyectos\VS2019\BlueUpdater\Source\obj\Debug\BlueUpdater.csproj.AssemblyReference.cache
 G:\@Proyectos\VS2019\BlueUpdater\Source\obj\Debug\BlueUpdater.csproj.CoreCompileInputs.cache
-G:\@Proyectos\VS2019\BlueUpdater\Source\obj\Debug\BlueUpdater.csproj.CopyComplete
 G:\@Proyectos\VS2019\BlueUpdater\Source\obj\Debug\BlueUpdater.exe
 G:\@Proyectos\VS2019\BlueUpdater\Source\obj\Debug\BlueUpdater.pdb
+G:\@Proyectos\VS2019\BlueUpdater\Source\obj\Debug\BlueUpda.3843BB7D.Up2Date

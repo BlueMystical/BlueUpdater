@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using UtilConsole;
 
 namespace BlueUpdater
 {
@@ -71,26 +73,63 @@ namespace BlueUpdater
                 BytesRead = totalRead
             });
         }
+		public static void UnzipFile(string zipFilePath, string extractPath, bool excludeContainingFolder)
+		{
+			try
+			{
+				if (File.Exists(zipFilePath))
+				{
+					using (ZipArchive archive = ZipFile.OpenRead(zipFilePath))
+					{
+						Directory.CreateDirectory(extractPath);
 
-        public static void UnzipFile(string zipFilePath, string extractPath)
-        {
-            using (ZipArchive archive = ZipFile.OpenRead(zipFilePath))
-            {
-                foreach (ZipArchiveEntry entry in archive.Entries)
-                {
-                    string destinationPath = Path.Combine(extractPath, entry.FullName);
+						// Find the root folder in the ZIP file
+						string rootFolder = archive.Entries
+							.Where(e => e.IsDirectory())
+							.Select(e => e.FullName.TrimEnd('/'))
+							.FirstOrDefault();
 
-                    if (!entry.IsDirectory())
-                    {
-                        Directory.CreateDirectory(Path.GetDirectoryName(destinationPath));
-                        entry.ExtractToFile(destinationPath, overwrite: true);
-                    }
-                }
-            }
-        }
+						foreach (ZipArchiveEntry entry in archive.Entries)
+						{
+							string destinationPath = excludeContainingFolder && entry.FullName.StartsWith(rootFolder)
+								? Path.Combine(extractPath, entry.FullName.Substring(rootFolder.Length + 1))
+								: Path.Combine(extractPath, entry.FullName);
 
-        // Extension method to check if a ZipArchiveEntry is a directory
-        private static bool IsDirectory(this ZipArchiveEntry entry)
+							if (!entry.IsDirectory())
+							{
+								// Rename existing files
+								if (File.Exists(destinationPath))
+								{
+									string backupPath = destinationPath + ".old";
+                                    File.Delete(destinationPath + ".old");
+									File.Move(destinationPath, backupPath);
+									//Console.WriteLine($"Renamed existing file {destinationPath} to {backupPath}");
+								}
+
+								// Ensure the directory exists
+								Directory.CreateDirectory(Path.GetDirectoryName(destinationPath));
+
+								// Extract the new file
+								entry.ExtractToFile(destinationPath, overwrite: true);
+								//Console.WriteLine($"Extracted {destinationPath}");
+							}
+						}
+					}
+				}
+				else
+				{
+					throw new Exception($"Error 404 - Not Found\r\n'{zipFilePath}'");
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Error: {ex.Message}", ConsoleColor.Red);
+			}
+		}
+
+
+		// Extension method to check if a ZipArchiveEntry is a directory
+		private static bool IsDirectory(this ZipArchiveEntry entry)
         {
             return entry.FullName.EndsWith("/");
         }
