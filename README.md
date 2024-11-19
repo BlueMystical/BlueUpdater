@@ -1,6 +1,7 @@
 # BlueUpdater
  AutoUpdater for Github Repo Releases.
  Checks and downloads the latest version of your Github repository.
+ All done in a Console Window, no fancy stuff.
 
 Get the [Latest Version here](https://github.com/BlueMystical/BlueUpdater/releases/latest/download/BlueUpdater.zip)
 
