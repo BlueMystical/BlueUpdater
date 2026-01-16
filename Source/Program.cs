@@ -10,10 +10,13 @@ namespace BlueUpdater
 {
 	class Program
 	{
+		private static dynamic _Config = null;
+		private static string latestVersion = "";
+
 		[STAThread]
 		static async Task Main(string[] args)
 		{
-			dynamic _Config = GetConfiguration("./Version.json");
+			_Config = GetConfiguration("./Version.json");
 			try
 			{
 				Consola.ValidateInstance();
@@ -22,7 +25,7 @@ namespace BlueUpdater
 				Consola.Write("Checking Version of:       ");
 				Consola.WriteLine(string.Format(@"{0}\{1}", _Config["GitHub-Owner"], _Config["GitHub-Repo"]), ConsoleColor.Cyan);
 
-				string latestVersion = await GitHubVersionChecker.GetLatestReleaseVersion(
+				latestVersion = await GitHubVersionChecker.GetLatestReleaseVersion(
 					_Config["GitHub-Owner"].ToString(), _Config["GitHub-Repo"].ToString());
 				latestVersion = latestVersion.TrimStart('v');
 
@@ -46,8 +49,7 @@ namespace BlueUpdater
 							_Config["GitHub-Owner"].ToString(), _Config["GitHub-Repo"].ToString(), _Config["ReleaseFile"].ToString());
 
 						string zipFilePath = $"./{_Config.ReleaseFile}";
-						string extractPath = Directory.GetParent(Consola.ApplicationInfo.AppExePath).FullName;
-
+						
 
 						// Setup and Start the Download:
 						DownloadHelper.DownloadProgressChanged += OnDownloadProgressChanged;
@@ -55,41 +57,6 @@ namespace BlueUpdater
 						DownloadHelper.DownloadFailed += OnDownloadFailed;
 
 						await DownloadHelper.DownloadFileAsync(url, zipFilePath);
-
-						//Kills the Parent App:
-						TerminateProgram(_Config.MainExecutable.ToString());
-
-						try
-						{
-							//The update should bring a new version of this program, therefore renaming the file so it can be patched.
-							DeleteOldFiles(extractPath);
-							System.IO.File.Move("./BlueUpdater.exe", "./BlueUpdater.exe.old");
-						}
-						catch { }
-
-						// Finally lets unzip the Update contents:
-						DownloadHelper.UnzipFile(zipFilePath, extractPath, (bool)_Config.FolderContained);
-
-						//Remember the new Version:
-						_Config["CurrentVersion"] = latestVersion;
-						File.WriteAllText("Version.json", JsonConvert.SerializeObject(_Config, Formatting.Indented));
-
-						Console.WriteLine("Download and extraction completed.");
-						string _MainExecutable = $"{_Config.MainExecutable}";
-						Consola.WriteLine($"Starting '{_MainExecutable}'..");
-
-						// Starts the newly updated Program:
-						if (File.Exists(_MainExecutable) && (bool)_Config.AutoRun)
-						{
-							var startInfo = new ProcessStartInfo
-							{
-								FileName = _MainExecutable,
-								UseShellExecute = false,
-								CreateNoWindow = true
-							};
-
-							Process.Start(startInfo);
-						}
 					}
 				}
 				else
@@ -117,6 +84,44 @@ namespace BlueUpdater
 		private static void OnDownloadCompleted(object sender, EventArgs e)
 		{
 			Consola.WriteLine("Download Completed.");
+
+			//Kills the Parent App:
+			TerminateProgram(_Config.MainExecutable.ToString());
+
+			string extractPath = Directory.GetParent(Consola.ApplicationInfo.AppExePath).FullName;
+			string zipFilePath = $"./{_Config.ReleaseFile}";
+
+			try
+			{
+				//The update should bring a new version of this program, therefore renaming the file so it can be patched.
+				DeleteOldFiles(extractPath);
+				System.IO.File.Move("./BlueUpdater.exe", "./BlueUpdater.exe.old");
+			}
+			catch { }
+
+			// Finally lets unzip the Update contents:
+			DownloadHelper.UnzipFile(zipFilePath, extractPath, (bool)_Config.FolderContained);
+
+			//Remember the new Version:
+			_Config["CurrentVersion"] = latestVersion;
+			File.WriteAllText("Version.json", JsonConvert.SerializeObject(_Config, Formatting.Indented));
+
+			Console.WriteLine("Download and extraction completed.");
+			string _MainExecutable = $"{_Config.MainExecutable}";
+			Consola.WriteLine($"Starting '{_MainExecutable}'..");
+
+			// Starts the newly updated Program:
+			if (File.Exists(_MainExecutable) && (bool)_Config.AutoRun)
+			{
+				var startInfo = new ProcessStartInfo
+				{
+					FileName = _MainExecutable,
+					UseShellExecute = false,
+					CreateNoWindow = true
+				};
+
+				Process.Start(startInfo);
+			}
 		}
 		private static void OnDownloadFailed(object sender, Exception e)
 		{
